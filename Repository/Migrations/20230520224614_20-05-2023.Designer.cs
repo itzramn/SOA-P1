@@ -12,8 +12,8 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230518220622_pilin")]
-    partial class pilin
+    [Migration("20230520224614_20-05-2023")]
+    partial class _20052023
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
