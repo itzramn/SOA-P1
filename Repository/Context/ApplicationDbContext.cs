@@ -11,11 +11,13 @@ namespace Repository.Context
     public class ApplicationDbContext : DbContext
     {
         public virtual DbSet<Persona> Personas { get; set; }
-        public ApplicationDbContext(DbContextOptions options): base(options) 
-        {
-            
-        }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<Empleado> Empleados { get; set; }
 
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

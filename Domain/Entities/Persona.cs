@@ -15,17 +15,17 @@ namespace Domain.Entities
         public int Id { get; set; }
         [StringLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string Nombre { get; set; }
         [StringLength(50)]
         [Required]
-        public string Lastname { get; set; }
-        [StringLength(15)]
+        public string Apellidos { get; set; }
+        [StringLength(18)]
+        [Required]
         public string CURP { get; set; }
         [StringLength(13)]
+        [Required]
         public string RFC { get; set; }
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
-
-
     }
 }

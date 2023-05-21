@@ -14,8 +14,7 @@ namespace Service.Services
     public class PersonaServicio : IPersona
     {
         private readonly ILogger<PersonaServicio> _logger;
-        private readonly PersonaRepositorio personaRepositorio;
-
+        public readonly PersonaRepositorio personaRepositorio;
 
         public PersonaServicio(ILogger<PersonaServicio> logger, ApplicationDbContext context)
         {
@@ -37,6 +36,28 @@ namespace Service.Services
             }
 
             return personas;
+        }
+
+        public List<EmpleadoVM> GetEmpleados()
+        {
+            List<EmpleadoVM> empleadoVMs = new List<EmpleadoVM>();
+            try
+            {
+                empleadoVMs = personaRepositorio.GetEmpleados().Select(x => new EmpleadoVM()
+                {
+                    Nombre = x.Nombre,
+                    Apellidos = x.Apellidos,
+                    Area = x.Area.Nombre,
+                    Email = x.Correo,
+                    NumEmpleado = x.NumEmpleado.ToString()
+                }).ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+
+            return empleadoVMs;
         }
     }
 }

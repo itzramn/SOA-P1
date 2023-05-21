@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
 
 namespace SOAP1_29AV.Controllers
@@ -8,6 +7,7 @@ namespace SOAP1_29AV.Controllers
     [Route("[controller]")]
     public class PersonasController : Controller
     {
+
         private readonly IPersona _persona;
 
         public PersonasController(IPersona persona)
@@ -18,7 +18,7 @@ namespace SOAP1_29AV.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok(_persona.ObtenerLista());
+            return Ok(_persona.GetEmpleados());
         }
     }
 }
