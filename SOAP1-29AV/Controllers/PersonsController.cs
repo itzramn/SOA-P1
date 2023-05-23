@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -24,17 +25,20 @@ namespace SOAP1_29AV.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var personas = _person.GetEmployees();
+            var persons = _person.GetEmployees();
 
             // Enviar correo electrónico
-            var recipient = "diegogutcat28@gmail.com";
             var subject = "Bienvenido";
             var htmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./../../../Welcome.html");
             var htmlBody = System.IO.File.ReadAllText(htmlFilePath);
 
-            _emailService.SendEmail(recipient, subject, htmlBody);
-            _emailService.SendSmtpEmail(recipient, subject, htmlBody);
-                    
+            foreach (var person in persons)
+            {
+                var recipient = person.Email;
+                _emailService.SendEmail(recipient, subject, htmlBody);
+                _emailService.SendSmtpEmail(recipient, subject, htmlBody);
+            }
+
             return Ok(_person.GetEmployees());
         }
     }
