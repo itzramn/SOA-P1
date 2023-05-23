@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.IServices;
+using System.Net.Mail;
+using System.Net.Mime;
+
 
 namespace SOAP1_29AV.Controllers
 {
@@ -25,11 +28,16 @@ namespace SOAP1_29AV.Controllers
 
             // Enviar correo electrónico
             var recipient = "diegogutcat28@gmail.com";
-            var subject = "Hola";
-            var body = "Este es un correo de prueba";
+            var subject = "Bienvenido";
+            var htmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./../../../Welcome.html");
+            var htmlBody = System.IO.File.ReadAllText(htmlFilePath);
 
-            _emailService.SendEmail(recipient, subject, body);
+            // Crear el cuerpo HTML como una vista alternativa
+            var htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, new ContentType("text/html"));
 
+            _emailService.SendEmail(recipient, subject, htmlBody);
+            _emailService.SendSmtpEmail(recipient, subject, htmlBody);
+                    
             return Ok(_persona.GetEmpleados());
         }
     }
