@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    [Table("Areas")]
+    [Table("Area")]
     public class Area
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Nombre { get; set; }
-        public string Descripción { get; set; }
-        public virtual ICollection<Empleado> Empleados { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
 
     }
 }

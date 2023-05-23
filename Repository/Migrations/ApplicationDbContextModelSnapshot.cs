@@ -30,20 +30,20 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descripción")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Area");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Persona", b =>
+            modelBuilder.Entity("Domain.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,10 +51,8 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CURP")
                         .IsRequired()
@@ -65,10 +63,12 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FechaNacimiento")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -80,38 +80,38 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Personas");
+                    b.ToTable("Person");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
 
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+            modelBuilder.Entity("Domain.Entities.Employee", b =>
                 {
-                    b.HasBaseType("Domain.Entities.Persona");
+                    b.HasBaseType("Domain.Entities.Person");
 
-                    b.Property<string>("Correo")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeNumber")
+                        .HasColumnType("int");
 
                     b.Property<int?>("IdArea")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumEmpleado")
-                        .HasColumnType("int");
-
                     b.HasIndex("IdArea");
 
-                    b.ToTable("Personas");
+                    b.ToTable("Person");
 
-                    b.HasDiscriminator().HasValue("Empleado");
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+            modelBuilder.Entity("Domain.Entities.Employee", b =>
                 {
                     b.HasOne("Domain.Entities.Area", "Area")
-                        .WithMany("Empleados")
+                        .WithMany("Employees")
                         .HasForeignKey("IdArea");
 
                     b.Navigation("Area");
@@ -119,7 +119,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Entities.Area", b =>
                 {
-                    b.Navigation("Empleados");
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }
