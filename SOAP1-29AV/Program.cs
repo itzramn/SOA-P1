@@ -10,7 +10,7 @@ IConfiguration configuration = builder.Configuration;
 builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IPersona, PersonaServicio>();
+builder.Services.AddTransient<IPerson, PersonService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 // Add services to the container.
 

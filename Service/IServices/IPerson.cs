@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Service.IServices
 {
-    public interface IPersona
+    public interface IPerson
     {
-        List<Persona> ObtenerLista();
-        List<EmpleadoVM> GetEmpleados();
+        List<Person> GetPersons();
+        List<EmployeeVM> GetEmployees();
     }
 }

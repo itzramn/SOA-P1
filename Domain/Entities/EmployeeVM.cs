@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class EmpleadoVM
+    public class EmployeeVM
     {
-        public string Nombre { get; set; }
-        public string Apellidos { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        public string NumEmpleado { get; set; }
+        public string EmployeeNumber { get; set; }
         public string Area { get; set; }
     }
 }

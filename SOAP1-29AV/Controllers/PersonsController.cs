@@ -8,23 +8,23 @@ namespace SOAP1_29AV.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PersonasController : Controller
+    public class PersonsController : Controller
     {
 
-        private readonly IPersona _persona;
+        private readonly IPerson _person;
         private readonly IEmailService _emailService;
 
 
-        public PersonasController(IPersona persona, IEmailService emailService)
+        public PersonsController(IPerson person, IEmailService emailService)
         {
-            _persona = persona;
+            _person = person;
             _emailService = emailService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var personas = _persona.GetEmpleados();
+            var personas = _person.GetEmployees();
 
             // Enviar correo electrónico
             var recipient = "diegogutcat28@gmail.com";
@@ -32,13 +32,10 @@ namespace SOAP1_29AV.Controllers
             var htmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./../../../Welcome.html");
             var htmlBody = System.IO.File.ReadAllText(htmlFilePath);
 
-            // Crear el cuerpo HTML como una vista alternativa
-            var htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, new ContentType("text/html"));
-
             _emailService.SendEmail(recipient, subject, htmlBody);
             _emailService.SendSmtpEmail(recipient, subject, htmlBody);
                     
-            return Ok(_persona.GetEmpleados());
+            return Ok(_person.GetEmployees());
         }
     }
 }

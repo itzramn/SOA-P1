@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace Repository.DAO
 {
-    public class PersonaRepositorio
+    public class PersonRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public PersonaRepositorio(ApplicationDbContext context)
+        public PersonRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public List<Persona> ObtenerLista()
+        public List<Person> GetPersons()
         {
-            List<Persona> Lista = new List<Persona>();
+            List<Person> Lista = new List<Person>();
 
-            Lista = _context.Personas.ToList();
+            Lista = _context.Persons.ToList();
 
             return Lista;
         }
 
-        public List<Empleado> GetEmpleados()
+        public List<Employee> GetEmployees()
         {
-            List<Empleado> list = new List<Empleado>();
+            List<Employee> list = new List<Employee>();
 
-            list = _context.Empleados.Include(x => x.Area).ToList();
+            list = _context.Employees.Include(x => x.Area).ToList();
 
             return list;
         }

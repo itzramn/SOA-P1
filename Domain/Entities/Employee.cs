@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Empleado : Persona
+    public class Employee : Person
     {
         [Required]
-        public int NumEmpleado { get; set; }
-        public string Correo { get; set; }
+        public int EmployeeNumber { get; set; }
+        public string Email { get; set; }
         [ForeignKey("Area")]
         public int? IdArea { get; set; }
         public virtual Area Area { get; set; }

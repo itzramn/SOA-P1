@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    [Table("Personas")]
-    public class Persona
+    [Table("Person")]
+    public class Person
     {
         [Key]
         public int Id { get; set; }
         [StringLength(50)]
         [Required]
-        public string Nombre { get; set; }
+        public string Name { get; set; }
         [StringLength(50)]
         [Required]
-        public string Apellidos { get; set; }
+        public string LastName { get; set; }
         [StringLength(18)]
         [Required]
         public string CURP { get; set; }
@@ -26,6 +26,6 @@ namespace Domain.Entities
         [Required]
         public string RFC { get; set; }
         [DataType(DataType.Date)]
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }
