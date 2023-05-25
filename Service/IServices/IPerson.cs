@@ -11,5 +11,6 @@ namespace Service.IServices
     {
         List<Person> GetPersons();
         List<EmployeeVM> GetEmployees();
+        bool ValidateLogin(string email, string password);
     }
 }

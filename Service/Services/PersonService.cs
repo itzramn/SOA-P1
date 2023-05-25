@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Repository.Context;
 using Repository.DAO;
@@ -58,6 +59,21 @@ namespace Service.Services
             }
 
             return employeeVMs;
+        }
+
+        public bool ValidateLogin(string email, string password)
+        {
+            var user = personRepository.GetEmployees().FirstOrDefault(x => x.Email == email);
+
+            if (user != null)
+            {
+                if (user.Password == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
